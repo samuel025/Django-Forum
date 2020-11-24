@@ -1,0 +1,66 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div id="colorlib-main">
+			<section class="ftco-section contact-section px-md-4">
+	      <div class="container">
+	        <div class="row d-flex mb-5 contact-info">
+	          <div class="col-md-12 mb-4">
+	            <h2 class="h3">Contact Information</h2>
+	          </div>
+	          <div class="w-100"></div>
+	          <div class="col-lg-6 col-xl-3 d-flex mb-4">
+	          	<div class="info bg-light p-4">
+		            <p><span>Address:</span> 1, Banana Island, Lagos</p>
+		          </div>
+	          </div>
+	          <div class="col-lg-6 col-xl-3 d-flex mb-4">
+	          	<div class="info bg-light p-4">
+		            <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+		          </div>
+	          </div>
+	          <div class="col-lg-6 col-xl-3 d-flex mb-4">
+	          	<div class="info bg-light p-4">
+		            <p><span>Email:</span> <a href="mailto:samolayemi3@gmail.com">samolayemi3@gmail.com</a></p>
+		          </div>
+	          </div>
+	          
+	        </div>
+	    {% if name %}
+		    <div class="alert alert-success">
+		        Mr./Mrs. {{ name }}, we have recieved your message. We will contact you shortly    
+		    </div>
+	    {% else %}
+	        
+	        <div class="row block-9">
+	          <div class="col-lg-6 d-flex">
+	            <form action="{% url 'contact'%}" method="POST" class="bg-light p-5 contact-form">
+	            {% csrf_token %}
+	              <div class="form-group">
+	                <input type="text" class="form-control" name="message-name" placeholder="Your Name">
+	              </div>
+	              <div class="form-group">
+	                <input type="text" class="form-control" name="message-email" placeholder="Your Email">
+	              </div>
+	              <div class="form-group">
+	                <input type="text" class="form-control" name="message-subject" placeholder="Subject">
+	              </div>
+	              <div class="form-group">
+	                <textarea class="form-control" rows="5" name="message_body" placeholder="Message"></textarea>
+	              </div>
+	              <div class="form-group">
+	                <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+	              </div>
+	            </form>
+	          
+	          </div>
+
+	          <div class="col-lg-6 d-flex">
+	          	<div id="map" class="bg-light"></div>
+	          </div>
+	        </div>
+	    {% endif %}
+	      </div>
+	    </section>
+		</div><!-- END COLORLIB-MAIN -->
+	</div><!-- END COLORLIB-PAGE -->
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %}
+{% block content %}
+    <div id="colorlib-main">
+        
+            <div class="container">
+                <div class="row d-flex">
+                    <div class="col-xl-8 py-5 px-md-5">
+                        <div class="row pt-md-4">
+                            <div class="col-md-12">
+                                
+
+                                    <h2>You have been logged out</h2>
+								    <div class="border-top pt-3">
+								        <h3 class="text-muted">
+								            <a href="{% url 'login' %}">Log In Again</a>
+								        </h3>
+								    </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+    </div>
+{% endblock content %}

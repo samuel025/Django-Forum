@@ -1,0 +1,61 @@
+{% extends "blog/base.html" %}
+{% block content %}
+  <div id="colorlib-main">
+    <div class="container">
+      <div class="row d-flex">
+        <div class="col-xl-8 py-5 px-md-5">
+          <div class="row pt-md-4">
+            <div class="col-md-12">
+              <article class="media content-section">
+                <img class="rounded-circle article-img" height="150" width="200" src="{{ object.author.profile.image.url }}">
+                <div class="media-body">
+                  <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+                    <small class="text-muted">{{ object.date|date:"F d, Y" }}</small>
+                    {% if object.author == user %}
+                    <div>
+                      <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'update' object.id %}">Update</a>
+                      <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'delete' object.id %}">Delete</a>
+                    </div>
+                    {% endif %}
+                  </div>
+                  <h2 class="article-title">{{ object.title }}</h2>
+                  <p class="article-content">{{ object.content }}</p><br>
+                  
+                  {% if object.post_pic %}
+                  <img class="mb-4 ml-4" src="{{ object.post_pic.url }}" height="300" width="300">
+                  {% endif %}<br>
+                    <form action="{% url 'like_post' post.pk %}" method="POST">
+                      {% csrf_token %}
+                      {% if total_likes == 1 %}
+                        <button class="btn btn-primary" type="submit", name="post_id", value="{{ post.pk }}">Like</button> - <span><i class="mr-3">{{total_likes}} Like</i></span>
+                      {% else %}
+                        <button class="btn btn-primary" type="submit", name="post_id", value="{{ post.pk }}">Like</button> - <span><i class="mr-3">{{total_likes}} Likes</i></span>
+                      {% endif %}
+                    </form>
+                  <h2>Comments...</h2>
+                    {% if not object.comments.all %}
+                      No comments yet.. <br> <a href="{% url 'comment' post.pk %}">Add one</a></div>
+                    {% else %}
+                    <a href="{% url 'comment' post.pk %}">Add Comments</a><br><hr>
+                      {% for comment in object.comments.all %}
+                      
+                        <div class="article-metadata">
+                          <span><i class="ml-2 mr-1">{{ comment.authors }}</i></span><small class="text-muted ml-4">{{ comment.date_added }}</small><br>
+                          <p class="ml-4">{{ comment.body }}</p>
+                        </div>
+                        <div>
+                          
+                        </div>                           
+                      {% endfor %}
+                    {% endif %}
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+    
+{% endblock content %}
